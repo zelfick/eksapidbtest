@@ -3,7 +3,7 @@
 [![terraform](https://img.shields.io/badge/terraform-v1.16.X-5C4EE5.svg)](https://www.terraform.io)
 
 ## This project is about
-terraform code for ballastlane test
+terraform code for deploy ballastlane test eks architecture
 
 ## To use this template  (Prerequisites)
 
@@ -17,7 +17,7 @@ You will need the following things properly installed on your computer.
 * [Terraform](https://www.terraform.io/downloads.html)
 * [terraform-docs](https://terraform-docs.io/user-guide/installation/)
 
-## Execution commands
+## Execution commands (from tfeks/)
 This is organized as environment and using backend config for specific one, referring the same shared resources
 We proceed to initialize and setup the backend:
 
@@ -37,7 +37,9 @@ Then proceed to create the eks cluster and wait between 10 to 15 min:
 
 Tear down all solution resources when finished:
 
-```tf18 -chdir=./main delete --auto-approve```
+```tf18 -chdir=./main destroy --auto-approve```
+
+note: tf18 is an alias for terraform 1.8.2
 
 ## Interact with the Cluster
 Execute this command to add the context to your local kubeconfig:
@@ -47,6 +49,13 @@ Execute this command to add the context to your local kubeconfig:
 Start executing kubectl commands:
 
 ```kubectl get nodes```
+
+Create the namespace from the path pyapi/k8s:
+```kubectl apply -f namespace.yaml```
+
+Deploy all the files related to postgres:
+```kubectl apply -f pyapi/k8s/progres```
+```kubectl apply -f pyapi/k8s/fastapi```
 
 ## Terraform-docs
 
