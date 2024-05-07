@@ -1,0 +1,9 @@
+postgres_data
+__pycache__
+postgres.compose.yaml
+fasapi.dockerfile
+.env
+k8s
+helm
+docker-compose.yaml
+README.md

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres # This value must match the service name 'database_url' in postgresql://postgres:passwd@db:5432/postgres
+  namespace: solution
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

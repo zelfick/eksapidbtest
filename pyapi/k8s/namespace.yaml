@@ -1,0 +1,7 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: solution
+  labels:
+    name: solution
+#kubectl apply -f solutionns.yaml

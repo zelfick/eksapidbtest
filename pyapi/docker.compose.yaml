@@ -1,0 +1,40 @@
+services:
+
+   fastapi:
+      build:
+         context: .
+         dockerfile: fastapipg.dockerfile
+      container_name: fastapipg
+      image: zelfick/fastapipg:latest
+      command: uvicorn main:app --host 0.0.0.0 --port 8000
+      ports:
+        - 8000:8000
+      depends_on:
+        - postgresdb
+      networks:
+        - fastapipg
+      env_file:
+        - .env
+
+   postgresdb:
+      image: postgres:16.2
+      container_name: postgresdb
+      restart: always
+      env_file:
+        - .env
+      ports:
+         - '5432:5432'
+      volumes:
+         - postgres_data:/var/lib/postgresql/data
+      networks:
+         - fastapipg
+
+networks:
+  fastapipg:
+
+volumes:
+   postgres_data:
+    driver: local
+
+# docker compose -f docker.compose.yaml up up -d
+# docker compose -f docker.compose.yaml up down -v , stop and remove volumes 
